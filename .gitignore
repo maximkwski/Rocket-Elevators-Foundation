@@ -23,13 +23,13 @@
 /public/assets
 .byebug_history
 
+/app/.DS_Store
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/database.yml
 
-/app/.DS_Store
 
 # Ignore application configuration
+/config/database.yml
+/config/database_pg.yml
 /config/application.yml
-sendgrid.env
 

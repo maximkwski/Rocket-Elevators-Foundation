@@ -22,32 +22,33 @@
         zoom: 4,
         center: uluru,
     });
-    const contentString =
-        '<div id="content">' +
-        '<div id="siteNotice">' +
-        "</div>" +
-        "</div>";
-    const infowindow = new google.maps.InfoWindow({
-        content: contentString,
-    });
-    const marker = new google.maps.Marker({
-        position: uluru,
-        map,
-        title: "Uluru (Ayers Rock)",
-    });
+    }
+    // const contentString =
+    //     '<div id="content">' +
+    //     '<div id="siteNotice">' +
+    //     "</div>" +
+    //     "</div>";
+    // const infowindow = new google.maps.InfoWindow({
+    //     content: contentString,
+    // });
+    // const marker = new google.maps.Marker({
+    //     position: uluru,
+    //     map,
+    //     title: "Uluru (Ayers Rock)",
+    // });
 
    
-    marker.addListener("click", () => {
-        infowindow.open({
-        anchor: marker,
-        map,
-        shouldFocus: false,
-        });
-    });
+    // marker.addListener("click", () => {
+    //     infowindow.open({
+    //     anchor: marker,
+    //     map,
+    //     shouldFocus: false,
+    //     });
+    // });  
 
-    }
+    
 
-    window.initMap = initMap;
+    // window.initMap = initMap;
 
     // The markers position
 

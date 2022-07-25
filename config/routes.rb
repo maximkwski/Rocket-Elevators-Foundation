@@ -1,4 +1,5 @@
 RailsAdmin::Engine.routes.draw do
+  
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
@@ -8,9 +9,11 @@ RailsAdmin::Engine.routes.draw do
   end
 
   get "polly", to: "rails_admin.polly_path"
+  resources :interventions
 end
 
 Rails.application.routes.draw do
+  
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
@@ -42,6 +45,7 @@ Rails.application.routes.draw do
  # get "portfolio", to: "pages#portfolio"
 
   resources :quotes
+  resources :interventions
   
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
