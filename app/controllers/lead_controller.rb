@@ -1,7 +1,5 @@
 require 'rest_client'
 require 'json'
-require 'sendgrid-ruby'
-include SendGrid
 require 'rubygems'
 require 'nokogiri' 
 require 'mailjet'

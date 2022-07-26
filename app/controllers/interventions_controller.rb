@@ -1,5 +1,7 @@
 class InterventionsController < ApplicationController
-  before_action :set_intervention, only: %i[ show edit update destroy ]
+  # before_action :set_intervention, only: %i[ show edit update destroy ]
+  respond_to :js, only: [:create]
+  respond_to :html
 
   # GET /interventions or /interventions.json
   def index
@@ -8,7 +10,7 @@ class InterventionsController < ApplicationController
 
   # GET /interventions/1 or /interventions/1.json
   def show
-    @interventions = Intervention.find(params[:id])
+    @intervention = Intervention.find(params[:id])
   end
 
   # GET /interventions/new
@@ -22,16 +24,38 @@ class InterventionsController < ApplicationController
 
   # POST /interventions or /interventions.json
   def create
-    @intervention = Intervention.new(intervention_params)
+    
+    customer_id = params["customers-input"]
+    building_id = params["buildings-input"]
+    battery_id = params["batteries-input"]
+    column_id = params["columns-input"]
+    elevator_id = params["elevators-input"]
+    employee_id = params["employees-input"]
+    report = params["description-input"]
 
-    respond_to do |format|
-      if @intervention.save
-        format.html { redirect_to intervention_url(@intervention), notice: "Intervention was successfully created." }
-        format.json { render :show, status: :created, location: @intervention }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @intervention.errors, status: :unprocessable_entity }
-      end
+    @intervention = Intervention.new(intervention_params)
+    @intervention.author_id = current_user.id
+    @intervention.customer_id = customer_id
+    @intervention.building_id = building_id
+    @intervention.battery_id = battery_id
+    @intervention.column_id = column_id
+    @intervention.elevator_id = elevator_id
+    @intervention.employee_id = employee_id
+    @intervention.report = report
+    
+    @intervention.save!
+    if @intervention.save
+      redirect_back fallback_location: new_intervention_path, notice: "Intervention was successfully created."
+
+    # respond_to do |format|
+    #   if @intervention.save
+    #     format.html { redirect_to intervention_url(@intervention), notice: "Intervention was successfully created." }
+    #     format.json { render :show, status: :created, location: @intervention }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @intervention.errors, status: :unprocessable_entity }
+    #   end
+    # end
     end
   end
 

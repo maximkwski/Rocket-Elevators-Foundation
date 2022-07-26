@@ -112,26 +112,27 @@
                             </li>
                             <li>
                                 <!-- INTERVENTIONS -->
-                                <%= link_to "INTERVENTIONS", new_intervention_path, 'data-turbolinks': false %>
+                                <% if user_signed_in? && current_user.is_admin == true %>
+                                    <%= link_to "INTERVENTIONS", new_intervention_path, 'data-turbolinks': false %>
+                                <% end %>
                             </li>
                             <li>
                                 <!-- LOGIN -->
-                                <%# <a href="/users/sign_in"></a> %>
                                 <% if user_signed_in?  == false %>
                                     <%= link_to "LOG IN", new_user_session_path %>
                                 <% elsif user_signed_in? && current_user.is_admin == true %>
                                     <%= link_to "SIGN OUT", destroy_user_session_path, method: :delete %>
                                 <% end %>
                             </li>
-                                <li>
-                                    <% if user_signed_in? && current_user.is_admin != true %>
-                                        <%= link_to "SIGN OUT", destroy_user_session_path, method: :delete %>
-                                </li>   
-                                <li>
-                                        <% elsif user_signed_in? && current_user.is_admin == true %>
-                                        <%= link_to "ADMIN", rails_admin_path %>
-                                    <% end %>
-                                </li>
+                            <li>
+                                <% if user_signed_in? && current_user.is_admin != true %>
+                                    <%= link_to "SIGN OUT", destroy_user_session_path, method: :delete %>
+                            </li>   
+                            <li>
+                                    <% elsif user_signed_in? && current_user.is_admin == true %>
+                                    <%= link_to "ADMIN", rails_admin_path %>
+                                <% end %>
+                            </li>
                         
                                 
                         </ul>
