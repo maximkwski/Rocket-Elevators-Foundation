@@ -1,3 +1,6 @@
+require 'rest_client'
+require 'json'
+
 class InterventionsController < ApplicationController
   # before_action :set_intervention, only: %i[ show edit update destroy ]
   respond_to :js, only: [:create]
@@ -24,6 +27,9 @@ class InterventionsController < ApplicationController
 
   # POST /interventions or /interventions.json
   def create
+    freshdesk_domain = ENV["BASE_URL"]
+    user_name_or_api_key =  ENV["FRESH_KEY"]
+    password_or_x = "X"
     
     customer_id = params["customers-input"]
     building_id = params["buildings-input"]
@@ -47,15 +53,36 @@ class InterventionsController < ApplicationController
     if @intervention.save
       redirect_back fallback_location: new_intervention_path, notice: "Intervention was successfully created."
 
-    # respond_to do |format|
-    #   if @intervention.save
-    #     format.html { redirect_to intervention_url(@intervention), notice: "Intervention was successfully created." }
-    #     format.json { render :show, status: :created, location: @intervention }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @intervention.errors, status: :unprocessable_entity }
-    #   end
-    # end
+      intervention_payload =  {
+        status: 3,
+        priority: 3,
+        type: "Problem",
+        email: 'test@xyz.com',
+        subject: "New Intervention Request #{Time.now}",
+        description: "TESTING OUT EPSOM SALT LIFE"
+        
+        
+        }
+        freshdesk_api_path = 'api/v2/tickets'
+        freshdesk_api_url  = "https://codeboxx777.freshdesk.com/#{freshdesk_api_path}"
+
+        site = RestClient::Resource.new(freshdesk_api_url, user_name_or_api_key, password_or_x)
+ 
+        begin
+            response = site.post(intervention_payload.to_json, {content_type: :json, accept: :json})
+            puts "response_code: #{response.code} \nLocation Header: #{response.headers[:Location]} \nresponse_body: #{response.body} \n"
+        rescue RestClient::Exception => exception
+            puts 'API Error: Your request is not successful. If you are not able to debug this error properly, mail us at support@freshdesk.com with the follwing X-Request-Id'
+            puts "X-Request-Id : #{exception.response.headers[:x_request_id]}"
+            puts "Response Code: #{exception.response.code} \nResponse Body: #{exception.response.body} \n"
+        end
+
+
+      else
+        redirect_back fallback_location: root_path, notice: "Please sign up or sign in before submitting a quote!"
+
+      respond_with(@qoute)
+      
     end
   end
 
