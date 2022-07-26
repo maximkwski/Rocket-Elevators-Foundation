@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     choose_customer.addEventListener("change", (e) => {
         if (e.target.value) {
-            console.log('yesssss')
         hideAll();
+        resetVal();
         document.getElementById("buildings").style.display = "";
         choose_building.addEventListener("change", (e) => {
                 if(e.target.value) {
@@ -27,11 +27,16 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 
             })
-        } else {
-            console.log('else')
         }
     }); 
     
+    function resetVal() {
+        document.getElementById("buildings-input").value = "";
+        document.getElementById("batteries-input").value = "";
+        document.getElementById("columns-input").value = "";
+        document.getElementById("elevators-input").value = "";
+    }
+
     function hideAll() {
         document.getElementById("buildings").style.display = "none";
         document.getElementById("batteries").style.display = "none";
