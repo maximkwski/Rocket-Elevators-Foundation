@@ -1,5 +1,95 @@
-<h1>New Intervention</h1>
+<%= form_with scope: :intervention, url: interventions_path, local: true, :html => {:format => "js"} do |form| %>
+<section>
+    <div class="container">
+        <div class="blog-post-item">
+            <h1>New Intervention:</h1>
+            <form id="myForm" enctype="multipart/form-data">
+                <fieldset>
+                     <div class="row" id="customers">
+                        <div class="col-md-12">
+                            <label for="customers-input">Select a Client</label>
+                            <select class="form-control pointer" name="customers-input" id="customers-input" style="font-size:100%">
+                                            <option value="">---Select---</option>
+                                            <option  id="" value="one">1</option>
+                                            <option  id="" value="two">2</option>
+                                            <option  id="" value="three">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="buildings" style="display:none">
+                        <div class="col-md-12">
+                            <label for="buildings-input">Select a Building</label>
+                            <select class="form-control pointer" name="buildings-input" id="buildings-input" style="font-size:100%">
+                                            <option value="">---Select---</option>
+                                            <option  id="" value="one">1</option>
+                                            <option  id="" value="two">2</option>
+                                            <option  id="" value="three">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="batteries" style="display:none">
+                        <div class="col-md-12">
+                            <label for="batteries-input">Select a Battery</label>
+                            <select class="form-control pointer" name="batteries-input" id="batteries-input" style="font-size:100%">
+                                            <option value="">---Select---</option>
+                                            <option  id="" value="one">1</option>
+                                            <option  id="" value="two">2</option>
+                                            <option  id="" value="three">3</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="row" id="columns" style="display:none">
+                        <div class="col-md-12">
+                            <label for="columns-input">Select a Columns</label>
+                            <select class="form-control pointer" name="columns-input" id="columns-input" style="font-size:100%">
+                                            <option value="">None</option>
+                                            <option  id="" value="one">1</option>
+                                            <option  id="" value="two">2</option>
+                                            <option  id="" value="three">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="elevators" style="display:none">
+                        <div class="col-md-12">
+                            <label for="elevators-input">Select an Elevator</label>
+                            <select class="form-control pointer" name="elevators-input" id="elevators-input" style="font-size:100%">
+                                            <option value="">None</option>
+                                            <option  id="" value="one">1</option>
+                                            <option  id="" value="two">2</option>
+                                            <option  id="" value="three">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="employees">
+                        <div class="col-md-12">
+                            <label for="employees-input">Select an Employee</label>
+                            <select class="form-control pointer" name="employees-input" id="employees-input" style="font-size:100%">
+                                            <option value="">None</option>
+                                            <option  id="" value="">1</option>
+                                            <option  id="" value="">2</option>
+                                            <option  id="" value="">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="description">
+                            <div class="col-md-12">
+                                <label for="description-input">Description</label>
+                                <textarea required maxlength="10000" rows="6" style="font-size:100%" class="form-control" name="description-input" id="description-input"></textarea>
+                            </div>
+                    </div>
+                </fieldset>  
+            </form>    
+        </div> 
+       
+        <div class="row" style="justify-content: center">
+            <div class="col-md-3">
+                 <%= form.submit %>
+            </div>
+        </div> 
 
-<%= render 'form', intervention: @intervention %>
+    </div>
+</section>
 
+<%# <%= render 'form', intervention: @intervention %>
 <%= link_to 'Back', interventions_path %>
+<% end %>

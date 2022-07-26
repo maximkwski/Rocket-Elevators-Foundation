@@ -8,6 +8,7 @@ class InterventionsController < ApplicationController
 
   # GET /interventions/1 or /interventions/1.json
   def show
+    @interventions = Intervention.find(params[:id])
   end
 
   # GET /interventions/new

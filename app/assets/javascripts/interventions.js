@@ -1,0 +1,41 @@
+document.addEventListener('DOMContentLoaded', function(e) {
+
+    const choose_customer = document.getElementById("customers-input");
+    const choose_building = document.getElementById("buildings-input");
+    const choose_battery = document.getElementById("batteries-input");
+    const choose_column = document.getElementById("columns-input");
+
+    choose_customer.addEventListener("change", (e) => {
+        if (e.target.value) {
+            console.log('yesssss')
+        hideAll();
+        document.getElementById("buildings").style.display = "";
+        choose_building.addEventListener("change", (e) => {
+                if(e.target.value) {
+                    document.getElementById("batteries").style.display = "";
+                    choose_battery.addEventListener("change", (e) => {
+                        if(e.target.value) {
+                            document.getElementById("columns").style.display = "";
+                            choose_column.addEventListener("change", (e) => {
+                                if(e.target.value) {
+                                    document.getElementById("elevators").style.display = "";
+                                }
+                            })
+                        }
+                    })
+                }
+
+
+            })
+        } else {
+            console.log('else')
+        }
+    }); 
+    
+    function hideAll() {
+        document.getElementById("buildings").style.display = "none";
+        document.getElementById("batteries").style.display = "none";
+        document.getElementById("columns").style.display = "none";
+        document.getElementById("elevators").style.display = "none";
+    }    
+})    
