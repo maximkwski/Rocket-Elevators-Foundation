@@ -8,67 +8,42 @@
                      <div class="row" id="customers">
                         <div class="col-md-12">
                             <label for="customers-input">Select a Client</label>
-                            <select class="form-control pointer" name="customers-input" id="customers-input" style="font-size:100%">
-                                            <option value="">---Select---</option>
-                                            <option  id="one" value="1">1</option>
-                                            <option  id="two" value="2">2</option>
-                                            <option  id="three" value="3">3</option>
-                            </select>
+                            <%= form.select(:customer_id, @customers.map { |c| [c.contact_name, c.id]}, {:include_blank => "None"})%>
+               
                         </div>
                     </div>
                     <div class="row" id="buildings" style="display:none">
                         <div class="col-md-12">
                             <label for="buildings-input">Select a Building</label>
-                            <select class="form-control pointer" name="buildings-input" id="buildings-input" style="font-size:100%">
-                                            <option value="">---Select---</option>
-                                            <option  id="one" value="1">1</option>
-                                            <option  id="two" value="2">2</option>
-                                            <option  id="three" value="3">3</option>
-                            </select>
+                            <%= form.select(:building_id , @buildings.map { |build| [build.address, build.id]}, {:include_blank => "None"})%>
+                   
                         </div>
                     </div>
                     <div class="row" id="batteries" style="display:none">
                         <div class="col-md-12">
                             <label for="batteries-input">Select a Battery</label>
-                            <select class="form-control pointer" name="batteries-input" id="batteries-input" style="font-size:100%">
-                                            <option value="">---Select---</option>
-                                            <option  id="one" value="1">1</option>
-                                            <option  id="two" value="2">2</option>
-                                            <option  id="three" value="3">3</option>
-                            </select>
+                            <%= form.select(:battery_id , @batteries.map { |btr| [btr.id, btr.id]}, {:include_blank => "None"})%>
+                  
                         </div>
                     </div>
                      <div class="row" id="columns" style="display:none">
                         <div class="col-md-12">
                             <label for="columns-input">Select a Column</label>
-                            <select class="form-control pointer" name="columns-input" id="columns-input" style="font-size:100%">
-                                            <option value="">None</option>
-                                            <option  id="one" value="1">1</option>
-                                            <option  id="two" value="2">2</option>
-                                            <option  id="three" value="3">3</option>
-                            </select>
+                            <%= form.select(:column_id , @columns.map { |cl| [cl.id, cl.id]}, {:include_blank => "None"})%>
+                   
                         </div>
                     </div>
                     <div class="row" id="elevators" style="display:none">
                         <div class="col-md-12">
                             <label for="elevators-input">Select an Elevator</label>
-                            <select class="form-control pointer" name="elevators-input" id="elevators-input" style="font-size:100%">
-                                            <option value="">None</option>
-                                            <option  id="one" value="1">1</option>
-                                            <option  id="two" value="2">2</option>
-                                            <option  id="three" value="3">3</option>
-                            </select>
+                            <%= form.select(:elevator_id , @elevators.map { |el| [el.id, el.id]}, {:include_blank => "None"})%>
+                 
                         </div>
                     </div>
                     <div class="row" id="employees">
                         <div class="col-md-12">
                             <label for="employees-input">Select an Employee</label>
-                            <select class="form-control pointer" name="employees-input" id="employees-input" style="font-size:100%">
-                                            <option value="">None</option>
-                                            <option  id="one" value="1">1</option>
-                                            <option  id="two" value="2">2</option>
-                                            <option  id="three" value="3">3</option>
-                            </select>
+                            <%= form.select(:employee_id , @employees.map { |e| [e.first_name, e.id]}, {:include_blank => "None"})%>
                         </div>
                     </div>
                     <div class="row" id="description">
@@ -90,6 +65,4 @@
     </div>
 </section>
 
-<%# <%= render 'form', intervention: @intervention %>
-<%= link_to 'Back', interventions_path %>
 <% end %>

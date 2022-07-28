@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function(e) {
 
-    const choose_customer = document.getElementById("customers-input");
-    const choose_building = document.getElementById("buildings-input");
-    const choose_battery = document.getElementById("batteries-input");
-    const choose_column = document.getElementById("columns-input");
+    const choose_customer = document.getElementById("intervention_customer_id");
+    const choose_building = document.getElementById("intervention_building_id");
+    const choose_battery = document.getElementById("intervention_battery_id");
+    const choose_column = document.getElementById("intervention_column_id");
 
     choose_customer.addEventListener("change", (e) => {
         if (e.target.value) {
         hideAll();
-        resetVal();
+        // resetVal();
         document.getElementById("buildings").style.display = "";
         choose_building.addEventListener("change", (e) => {
                 if(e.target.value) {

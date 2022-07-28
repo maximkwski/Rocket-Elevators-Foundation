@@ -19,6 +19,13 @@ class InterventionsController < ApplicationController
   # GET /interventions/new
   def new
     @intervention = Intervention.new
+    @customers = Customer.all
+    @buildings = Building.all
+    @batteries = Battery.all
+    @columns = Column.all
+    @elevators = Elevator.all
+    @employees = Employee.all
+
   end
 
   # GET /interventions/1/edit
@@ -31,23 +38,15 @@ class InterventionsController < ApplicationController
     user_name_or_api_key =  ENV["FRESH_KEY"]
     password_or_x = "X"
     
-    customer_id = params["customers-input"]
-    building_id = params["buildings-input"]
-    battery_id = params["batteries-input"]
-    column_id = params["columns-input"]
-    elevator_id = params["elevators-input"]
-    employee_id = params["employees-input"]
-    report = params["description-input"]
-
     @intervention = Intervention.new(intervention_params)
     @intervention.author_id = current_user.id
-    @intervention.customer_id = customer_id
-    @intervention.building_id = building_id
-    @intervention.battery_id = battery_id
-    @intervention.column_id = column_id
-    @intervention.elevator_id = elevator_id
-    @intervention.employee_id = employee_id
-    @intervention.report = report
+    # @intervention.customer_id = params["intervention_customer_id"]
+    # @intervention.building_id = params["intervention_building_id"]
+    # @intervention.battery_id = params["intervention_battery_id"]
+    # @intervention.column_id = params["intervention_column_id"]
+    # @intervention.elevator_id = params["intervention_elevator_id"]
+    # @intervention.employee_id = params["intervention_employee_id"]
+    @intervention.report = params["description-input"]
     
     @intervention.save!
     if @intervention.save
@@ -57,9 +56,9 @@ class InterventionsController < ApplicationController
         status: 3,
         priority: 3,
         type: "Problem",
-        email: 'test@xyz.com',
+        email: @current_user.email,
         subject: "New Intervention Request #{Time.now}",
-        description: "TESTING OUT EPSOM SALT LIFE"
+        description: "New Intervention request from a client ID: #{@intervention.customer_id}. Building ID: #{@intervention.building_id} "
         
         
         }
@@ -117,6 +116,7 @@ class InterventionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def intervention_params
-      params.fetch(:intervention, {})
+      # params.fetch(:intervention, {})
+      params.require(:intervention).permit(:customer_id, :building_id, :battery_id, :column_id, :elevator_id, :employee_id)
     end
 end
