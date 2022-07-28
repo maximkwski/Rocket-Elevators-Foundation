@@ -1,0 +1,68 @@
+<%= form_with scope: :intervention, url: interventions_path, local: true, :html => {:format => "js"} do |form| %>
+<section>
+    <div class="container">
+        <div class="blog-post-item">
+            <h1>New Intervention:</h1>
+            <form id="myForm" enctype="multipart/form-data">
+                <fieldset>
+                     <div class="row" id="customers">
+                        <div class="col-md-12">
+                            <label for="customers-input">Select a Client</label>
+                            <%= form.select(:customer_id, @customers.map { |c| [c.contact_name, c.id]}, {:include_blank => "None"})%>
+               
+                        </div>
+                    </div>
+                    <div class="row" id="buildings" style="display:none">
+                        <div class="col-md-12">
+                            <label for="buildings-input">Select a Building</label>
+                            <%= form.select(:building_id , @buildings.map { |build| [build.address, build.id]}, {:include_blank => "None"})%>
+                   
+                        </div>
+                    </div>
+                    <div class="row" id="batteries" style="display:none">
+                        <div class="col-md-12">
+                            <label for="batteries-input">Select a Battery</label>
+                            <%= form.select(:battery_id , @batteries.map { |btr| [btr.id, btr.id]}, {:include_blank => "None"})%>
+                  
+                        </div>
+                    </div>
+                     <div class="row" id="columns" style="display:none">
+                        <div class="col-md-12">
+                            <label for="columns-input">Select a Column</label>
+                            <%= form.select(:column_id , @columns.map { |cl| [cl.id, cl.id]}, {:include_blank => "None"})%>
+                   
+                        </div>
+                    </div>
+                    <div class="row" id="elevators" style="display:none">
+                        <div class="col-md-12">
+                            <label for="elevators-input">Select an Elevator</label>
+                            <%= form.select(:elevator_id , @elevators.map { |el| [el.id, el.id]}, {:include_blank => "None"})%>
+                 
+                        </div>
+                    </div>
+                    <div class="row" id="employees">
+                        <div class="col-md-12">
+                            <label for="employees-input">Select an Employee</label>
+                            <%= form.select(:employee_id , @employees.map { |e| [e.first_name, e.id]}, {:include_blank => "None"})%>
+                        </div>
+                    </div>
+                    <div class="row" id="description">
+                            <div class="col-md-12">
+                                <label for="description-input">Description</label>
+                                <textarea required maxlength="10000" rows="6" style="font-size:100%" class="form-control" name="description-input" id="description-input"></textarea>
+                            </div>
+                    </div>
+                </fieldset>  
+            </form>    
+        </div> 
+       
+        <div class="row" style="justify-content: center">
+            <div class="col-md-3">
+                 <%= form.submit %>
+            </div>
+        </div> 
+
+    </div>
+</section>
+
+<% end %>

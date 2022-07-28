@@ -1,7 +1,5 @@
 require 'rest_client'
 require 'json'
-require 'sendgrid-ruby'
-include SendGrid
 require 'rubygems'
 require 'nokogiri' 
 require 'mailjet'
@@ -20,11 +18,6 @@ class LeadController < ApplicationController
     def new
         @lead = Lead.new
     end
-
-    # def confirmation_email
-    #     attachments.inline["R2.png"] = File.read("#{R2.png}/app/views/layouts/R2.png")
-    #     # mail(to: email, subject: 'test subject')
-    # end
     
     def create 
         freshdesk_domain = ENV["BASE_URL"]

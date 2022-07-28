@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2022_07_18_154103) do
     t.string "building_city"
   end
 
-  create_table "fact_intervention", force: :cascade do |t|
+  create_table "fact_interventions", force: :cascade do |t|
     t.integer "employee_id"
     t.integer "building_id"
     t.integer "battery_id"
