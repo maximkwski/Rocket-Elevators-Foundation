@@ -78,12 +78,48 @@ class InterventionsController < ApplicationController
 
 
       else
-        redirect_back fallback_location: root_path, notice: "Please sign up or sign in before submitting a quote!"
+        redirect_back fallback_location: root_path, notice: "Please sign up or sign in before submitting an intervention request."
 
-      respond_with(@qoute)
+      respond_with(@intervention)
       
     end
   end
+
+  ### DYNAMIC SELECT DROPDOWN METHODS ###
+  def get_buildings_by_customer
+    @buildings = Building.where("customer_id = ?", params[:customer_id])
+    respond_to do |format|
+      format.json { render :json => @buildings }
+    end
+  end 
+  def building_search
+    if params[:customer].present? && params[:customer].strip != ""
+      @buildings = Building.where("customer_id = ?", params[:customer])
+    else
+      @buildings = Building.all
+    end
+  end
+
+  def get_batteries_by_building
+    @batteries = Battery.where("building_id = ?", params[:building_id])
+    respond_to do |format|
+      format.json { render :json => @batteries }
+    end
+  end 
+
+  def get_columns_by_battery
+    @bcolumns = Column.where("battery_id = ?", params[:battery_id])
+    respond_to do |format|
+      format.json { render :json => @columns }
+    end
+  end 
+
+  def get_elevators_by_column
+    @elevators = Elevator.where("column_id = ?", params[:column_id])
+    respond_to do |format|
+      format.json { render :json => @elevators }
+    end
+  end 
 
   # PATCH/PUT /interventions/1 or /interventions/1.json
   def update

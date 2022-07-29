@@ -46,6 +46,12 @@ Rails.application.routes.draw do
 
   resources :quotes
   resources :interventions
+
+  #interventions
+  get 'get_buildings_by_customer/:customer_id', to: 'interventions#get_buildings_by_customer'
+  get 'get_batteries_by_building/:building_id', to: 'interventions#get_batteries_by_building'
+  get 'get_columns_by_battery/:battery_id', to: 'interventions#get_columns_by_battery'
+  get 'get_elevators_by_column/:column_id', to: 'interventions#get_elevators_by_column'
   
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

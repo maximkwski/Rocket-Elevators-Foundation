@@ -73,7 +73,7 @@ class QuotesController < ApplicationController
                 else
                     redirect_back fallback_location: root_path, notice: "Please sign up or sign in before submitting a quote!"
             
-                respond_with(@qoute)
+                respond_with(@quote)
                 end
         end   
     end
