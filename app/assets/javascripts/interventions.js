@@ -12,15 +12,20 @@ document.addEventListener('DOMContentLoaded', function(e) {
         hideAll();
         search_building();
         document.getElementById("buildings").style.display = "";
+
         choose_building.addEventListener("change", (e) => {
-            
                 if(e.target.value) {
+                    search_battery();
                     document.getElementById("batteries").style.display = "";
+
                     choose_battery.addEventListener("change", (e) => {
                         if(e.target.value) {
+                            search_column();
                             document.getElementById("columns").style.display = "";
+
                             choose_column.addEventListener("change", (e) => {
                                 if(e.target.value) {
+                                    search_elevator()
                                     document.getElementById("elevators").style.display = "";
                                 }
                             })
@@ -49,6 +54,59 @@ document.addEventListener('DOMContentLoaded', function(e) {
               }
              });
     }
+
+    function search_battery() {
+        // Send the request and update batteries dropdown
+        var id_value_string = $('#intervention_building_id').val();
+        $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: '/get_batteries_by_building/'+ id_value_string, 
+         data: {'id_value_string': id_value_string},
+         success: function(result) {
+           for(battery in result) {
+               $('#intervention_battery_id').append(`<option value="${result[battery].id}"> ${result[battery].id} </option>`);
+           }
+           console.log(result);
+         }
+        });
+    }
+
+    function search_column() {
+        // Send the request and update columns dropdown
+        var id_value_string = $('#intervention_battery_id').val();
+        $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: '/get_columns_by_battery/'+ id_value_string, 
+         data: {'id_value_string': id_value_string},
+         success: function(result) {
+           for(column in result) {
+               $('#intervention_column_id').append(`<option value="${result[column].id}"> ${result[column].id} </option>`);
+           }
+           console.log(result);
+         }
+        });
+    }
+
+    function search_elevator() {
+        // Send the request and update elevators dropdown
+        var id_value_string = $('#intervention_column_id').val();
+        $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: '/get_elevators_by_column/'+ id_value_string, 
+         data: {'id_value_string': id_value_string},
+         success: function(result) {
+           for(elevator in result) {
+               $('#intervention_elevator_id').append(`<option value="${result[elevator].id}"> ${result[elevator].id} </option>`);
+           }
+           console.log(result);
+         }
+        });
+    }
+
+
     
     function resetVal() {
         document.getElementById("intervention_building_id").value = "";

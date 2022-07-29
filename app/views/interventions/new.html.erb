@@ -23,21 +23,21 @@
                     <div class="row" id="batteries" style="display:none">
                         <div class="col-md-12">
                             <label for="batteries-input">Select a Battery</label>
-                            <%= form.select(:battery_id , @batteries.map { |btr| [btr.id, btr.id]}, {:include_blank => "None"})%>
+                            <%= form.select :battery_id , :None => nil %>
                   
                         </div>
                     </div>
                      <div class="row" id="columns" style="display:none">
                         <div class="col-md-12">
                             <label for="columns-input">Select a Column</label>
-                            <%= form.select(:column_id , @columns.map { |cl| [cl.id, cl.id]}, {:include_blank => "None"})%>
+                            <%= form.select :column_id , :None => nil %>
                    
                         </div>
                     </div>
                     <div class="row" id="elevators" style="display:none">
                         <div class="col-md-12">
                             <label for="elevators-input">Select an Elevator</label>
-                            <%= form.select(:elevator_id , @elevators.map { |el| [el.id, el.id]}, {:include_blank => "None"})%>
+                            <%= form.select :elevator_id , :None => nil %>
                  
                         </div>
                     </div>

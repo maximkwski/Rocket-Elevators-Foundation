@@ -89,28 +89,30 @@ class InterventionsController < ApplicationController
   def get_buildings_by_customer
     @buildings = Building.where(customer_id: params[:id_value_string])
     puts params[:id_value_string]
-    # respond_with(@buildings)
     respond_to do |format|
       format.json { render :json => @buildings }
     end
   end 
 
   def get_batteries_by_building
-    @batteries = Battery.where("building_id = ?", params[:building_id])
+    @batteries = Battery.where(building_id: params[:id_value_string])
+    puts params[:id_value_string]
     respond_to do |format|
       format.json { render :json => @batteries }
     end
   end 
 
   def get_columns_by_battery
-    @bcolumns = Column.where("battery_id = ?", params[:battery_id])
+    @columns = Column.where(battery_id: params[:id_value_string])
+    puts params[:id_value_string]
     respond_to do |format|
       format.json { render :json => @columns }
     end
   end 
 
   def get_elevators_by_column
-    @elevators = Elevator.where("column_id = ?", params[:column_id])
+    @elevators = Elevator.where(column_id: params[:id_value_string])
+    puts params[:id_value_string]
     respond_to do |format|
       format.json { render :json => @elevators }
     end
