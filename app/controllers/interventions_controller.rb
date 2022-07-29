@@ -87,18 +87,13 @@ class InterventionsController < ApplicationController
 
   ### DYNAMIC SELECT DROPDOWN METHODS ###
   def get_buildings_by_customer
-    @buildings = Building.where("customer_id = ?", params[:customer_id])
+    @buildings = Building.where(customer_id: params[:id_value_string])
+    puts params[:id_value_string]
+    # respond_with(@buildings)
     respond_to do |format|
       format.json { render :json => @buildings }
     end
   end 
-  def building_search
-    if params[:customer].present? && params[:customer].strip != ""
-      @buildings = Building.where("customer_id = ?", params[:customer])
-    else
-      @buildings = Building.all
-    end
-  end
 
   def get_batteries_by_building
     @batteries = Battery.where("building_id = ?", params[:building_id])

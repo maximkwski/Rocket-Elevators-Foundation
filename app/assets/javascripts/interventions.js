@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         if (e.target.value) {
         resetVal();
         hideAll();
-        // search_building();
+        search_building();
         document.getElementById("buildings").style.display = "";
         choose_building.addEventListener("change", (e) => {
             
@@ -35,17 +35,19 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     function search_building() {
              // Send the request and update buildings dropdown
+             var id_value_string = $('#intervention_customer_id').val();
              $.ajax({
-              data: "GET",
+              type: "GET",
               dataType: "json",
-              url: '/get_buildings_by_customer/',
-              success: function(data) {
-                for(building in data) {
-                    $('#intervention_building_id').append(`<option value="${data[building].id}"> ${data[building].address} </option>`);
+              url: '/get_buildings_by_customer/'+ id_value_string, 
+              data: {'id_value_string': id_value_string},
+              success: function(result) {
+                for(building in result) {
+                    $('#intervention_building_id').append(`<option value="${result[building].id}"> ${result[building].address} </option>`);
                 }
+                console.log(result);
               }
              });
-             console.log(data)
     }
     
     function resetVal() {

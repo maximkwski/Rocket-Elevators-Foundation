@@ -15,7 +15,8 @@
                     <div class="row" id="buildings" style="display:none">
                         <div class="col-md-12">
                             <label for="buildings-input">Select a Building</label>
-                            <%= form.select(:building_id , @buildings.map { |build| [build.address, build.id]}, {:include_blank => "None"})%>
+                            <%= form.select(:building_id , {:None => "None is NONE"})%>
+                            <%# <%= form.select(:building_id , @buildings.map { |build| [build.address, build.id]}, {:include_blank => "None"})%> 
                    
                         </div>
                     </div>
