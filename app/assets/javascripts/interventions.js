@@ -47,7 +47,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
               url: '/get_buildings_by_customer/'+ id_value_string, 
               data: {'id_value_string': id_value_string},
               success: function(result) {
-                for(building in result) {
+                
+                  $("#intervention_building_id").empty(); 
+                  $('#intervention_building_id').append('<option selected="selected" value="">None</option>')
+                  for(building in result) {
                     $('#intervention_building_id').append(`<option value="${result[building].id}"> ${result[building].address} </option>`);
                 }
                 console.log(result);
@@ -64,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
          url: '/get_batteries_by_building/'+ id_value_string, 
          data: {'id_value_string': id_value_string},
          success: function(result) {
+             $("#intervention_battery_id").empty(); 
+             $('#intervention_battery_id').append('<option selected="selected" value="">None</option>')
            for(battery in result) {
                $('#intervention_battery_id').append(`<option value="${result[battery].id}"> ${result[battery].id} </option>`);
            }
@@ -81,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
          url: '/get_columns_by_battery/'+ id_value_string, 
          data: {'id_value_string': id_value_string},
          success: function(result) {
+             $("#intervention_column_id").empty(); 
+             $('#intervention_column_id').append('<option selected="selected" value="">None</option>')
            for(column in result) {
                $('#intervention_column_id').append(`<option value="${result[column].id}"> ${result[column].id} </option>`);
            }
@@ -98,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
          url: '/get_elevators_by_column/'+ id_value_string, 
          data: {'id_value_string': id_value_string},
          success: function(result) {
+           
+             $("#intervention_elevator_id").empty(); 
+             $('#intervention_elevator_id').append('<option selected="selected" value="">None</option>')
            for(elevator in result) {
                $('#intervention_elevator_id').append(`<option value="${result[elevator].id}"> ${result[elevator].id} </option>`);
            }
