@@ -20,10 +20,6 @@ class InterventionsController < ApplicationController
   def new
     @intervention = Intervention.new
     @customers = Customer.all
-    @buildings = Building.all
-    @batteries = Battery.all
-    @columns = Column.all
-    @elevators = Elevator.all
     @employees = Employee.all
 
   end
@@ -40,28 +36,47 @@ class InterventionsController < ApplicationController
     
     @intervention = Intervention.new(intervention_params)
     @intervention.author_id = current_user.id
-    # @intervention.customer_id = params["intervention_customer_id"]
-    # @intervention.building_id = params["intervention_building_id"]
-    # @intervention.battery_id = params["intervention_battery_id"]
-    # @intervention.column_id = params["intervention_column_id"]
-    # @intervention.elevator_id = params["intervention_elevator_id"]
-    # @intervention.employee_id = params["intervention_employee_id"]
     @intervention.report = params["description-input"]
-    
-    @intervention.save!
-    if @intervention.save
+
+    if user_signed_in? && current_user.is_admin
+      @intervention.save!
+      if @intervention.save
       redirect_back fallback_location: new_intervention_path, notice: "Intervention was successfully created."
 
-      intervention_payload =  {
+     if @intervention.column_id && @intervention.elevator_id == nil
+       intervention_payload =  {
         status: 3,
         priority: 3,
         type: "Problem",
         email: @current_user.email,
         subject: "New Intervention Request #{Time.now}",
-        description: "New Intervention request from a client ID: #{@intervention.customer_id}. Building ID: #{@intervention.building_id} "
-        
-        
+        description: "New Intervention request from a client ID: #{@intervention.customer_id}. Building ID: #{@intervention.building_id}. <br/>
+        Battery #{@intervention.battery_id} required maintenance.  Employee #{@intervention.employee_id} is assigned to solve the problem."
         }
+
+      elsif @intervention.elevator_id == nil
+        intervention_payload =  {
+          status: 3,
+          priority: 3,
+          type: "Problem",
+          email: @current_user.email,
+          subject: "New Intervention Request #{Time.now}",
+          description: "New Intervention request from a client ID: #{@intervention.customer_id}. Building ID: #{@intervention.building_id}. <br/>
+          Battery with ID: #{@intervention.battery_id}. Column with ID: #{@intervention.column_id} required maintenance. Employee #{@intervention.employee_id} is assigned to solve the problem."
+          }
+
+        else  
+          intervention_payload =  {
+            status: 3,
+            priority: 3,
+            type: "Problem",
+            email: @current_user.email,
+            subject: "New Intervention Request #{Time.now}",
+            description: "New Intervention request from a client ID: #{@intervention.customer_id}. Building ID: #{@intervention.building_id}. <br/>
+            Battery with ID: #{@intervention.battery_id}. Column ID: #{@intervention.column_id}. Elevator with ID: #{@intervention.elevator_id} required maintenance. Employee #{@intervention.employee_id} is assigned to solve the problem."
+            }
+
+          end
         freshdesk_api_path = 'api/v2/tickets'
         freshdesk_api_url  = "https://codeboxx777.freshdesk.com/#{freshdesk_api_path}"
 
@@ -81,7 +96,7 @@ class InterventionsController < ApplicationController
         redirect_back fallback_location: root_path, notice: "Please sign up or sign in before submitting an intervention request."
 
       respond_with(@intervention)
-      
+      end
     end
   end
 
