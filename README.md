@@ -1,4 +1,5 @@
-LIVE WEBSITE ON dave-mustaine.com
+LIVE WEBSITE: maksymkproject.xyz
+LIVE API: https://codeboxxgroup.azurewebsites.net/
 
 # README
 
@@ -56,7 +57,20 @@ You can add environment variables as key/value pairs
 * FRESHDESK :
 When a customer sends quote request or contact request, new ticket is created on FreshDesk API, domain name codeboxx777.freshdesk.com 
 The ticket contanins client's contact information and information that the client fills up in quote request or contact form, which customer support of Rocket Elevators can work with, in order to complete client's request.
+When employee is logged in and filled up the Intervention form for the client, the new ticket is created providing all the information about required maintenance.
 gems used: 'rest-client', 'json'
 
 * AMAZON POLLY
  When the admin successfully logged in, and go to Admin page. the Amazon Polly function will be triggered and API being called, which  receiving a text and sends the audio file back with all information that admin can play via simple web browser audio player.
+
+* Twilio 
+When an elevator status is changed to intervention, a text indicating certain information will be sent to either cole's or tim's phone number.
+
+* DROPBOX 
+When a file is attached in the leads form, and the email indicated in the lead form can be connected to a customer email in the database, the file will save in dropbox, and the file can also be viewed in the admin page.
+
+* Slack
+When any elevator status is changed at all, a message will be sent in the rocket elevators slack server indicating what elevator had the status change, and what the status has been changed to.
+
+* MAILJET 
+ Will send an automated email thanking a user for filling out the contact form on the home page, to the email that was filled out in the email.
