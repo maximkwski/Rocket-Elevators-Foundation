@@ -16,7 +16,7 @@ set :rails_env, "development"
 set :bundle_without, "production"
 set :deploy_to, "/home/maksym/apps/#{app}"
 set :linked_dirs, %w{tmp/pids tmp/sockets log}
-# set :linked_files, %w{config/database.yml config/application.yml config/database_pg.yml}
+set :linked_files, %w{config/database.yml config/application.yml config/database_pg.yml}
 
 # role-based syntax
 # ==================
@@ -26,9 +26,9 @@ set :linked_dirs, %w{tmp/pids tmp/sockets log}
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-role :app, %w{maksym@137.184.219.17}
-role :web, %w{maksym@137.184.219.17}
-role :db,  %w{maksym@137.184.219.17}
+# role :app, %w{maksym@137.184.219.17}
+# role :web, %w{maksym@137.184.219.17}
+# role :db,  %w{maksym@137.184.219.17}
 
 
 
