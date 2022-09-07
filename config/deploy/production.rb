@@ -16,7 +16,7 @@ set :rails_env, "development"
 set :bundle_without, "production"
 set :deploy_to, "/home/maksym/apps/#{app}"
 set :linked_dirs, %w{tmp/pids tmp/sockets log}
-set :linked_files, %w{config/database.yml config/application.yml config/database_pg.yml}
+# set :linked_files, %w{config/database.yml config/application.yml config/database_pg.yml}
 
 # role-based syntax
 # ==================
